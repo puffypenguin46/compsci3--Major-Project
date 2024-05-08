@@ -8,9 +8,11 @@ at the end. If succsessful, add create a storyline.
 ## Needs to have list
 week 1
 - plan out project
+  
 week 2-3
  - research and impliment the 3d maze
  - make player navigate through the maze/ flip through each image using the arrowkeys
+   
 week 3-4
 -if maze if functional add collectable objects
 -implement ways to apply objects to needed puzzles
