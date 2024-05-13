@@ -14,7 +14,7 @@ week 2-3
  - make player navigate through the maze/ flip through each image using the arrowkeys
    
 week 3-4
-- if maze if functional add collectable objects
+- music + sound design
 -implement ways to apply objects to needed puzzles
 *look at coding for previous escape room project
 
@@ -22,5 +22,5 @@ week 3-4
 week 4-5
 - clear up assests and make it aesthetically appealing
 - add a storyline that's told through narraration
-- music + sound design
-- extra effects and animations 
+- extra effects and animations
+- if maze if functional add collectable objects
