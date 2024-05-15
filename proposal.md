@@ -14,7 +14,7 @@ week 2-3
  - make player navigate through the maze/ flip through each image using the arrowkeys
    
 week 3-4
-- if maze if functional add collectable objects
+- music + sound design
 -implement ways to apply objects to needed puzzles
 *look at coding for previous escape room project
 
@@ -22,5 +22,12 @@ week 3-4
 week 4-5
 - clear up assests and make it aesthetically appealing
 - add a storyline that's told through narraration
-- music + sound design
-- extra effects and animations 
+- extra effects and animations
+- if maze if functional add collectable objects
+
+  ray casting sources:
+
+  https://en.wikipedia.org/wiki/Ray_casting#:~:text=Ray%20casting%20greatly%20simplified%20image,the%20objects%20in%20the%20scene.
+  https://lodev.org/cgtutor/raycasting.html#Introduction
+  https://p5js.org/examples/3d-ray-casting.html
+https://youtu.be/gmb6WVoIPCI?si=w4dKWUYf_mw3ALFT
