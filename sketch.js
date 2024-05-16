@@ -21,20 +21,19 @@
 // Capital X marks a wall, P marks the player's starting position
 //lower case e in an enemy 
 const GAME_MAP = [
-  "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXX",
-  "X                                            X",
-  "X                                            X",
-  "X             X                P             X",
-  "X             X                              X",
-  "X                       e                    X",
-  "X                                            X",
-  "X                          XXXX              X",
-  "X       e                                    X",
-  "X                                            X",
-  "X                                            X",
-  "X                                            X",
-  "X                                            X",
-  "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXX",
+  "X                         e      X",
+  "X                       p        X",
+  "X       XXXXXXX   XXX            X",
+  "X       X           X            X",
+  "X       X   XX  X   X     XXXX   X",
+  "X       X   Xe  X   X        X   X",
+  "X       X   XXXXX   X       eX   X", 
+  "X       X           X     XXXX   X",
+  "X       XXXXXXXXXXXXX            X",
+  "X  e                             X",
+  "X                                X",
+  "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 ];
 
 const GRID_SIZE = 150;
@@ -46,31 +45,50 @@ const CAM_X = 100;
 const CAM_Y = -75;
 const CAM_Z = 50;
 
+
 let wallTexture;
 let walls = [];
 let player;
 let enemies = [];
 
 function preload() {
-  wallTexture = loadImage('hallway 1.png');
+  wallTexture = loadImage("hallway 1.png");
 }
-
 
 function setup() {
   // set canvas to WEBGl so render things in 3d
   createCanvas(920, 600, WEBGL);
 
   //game layout
-  //looping through 
+  //looping through arrays to look up what tile object is at that very position
   for (let z = 0; z < GAME_MAP, length;  z ++){
     for (let x = 0; x < GAME_MAP[z].length; x++) {
       let tile = GAME_MAP[z][x];
+      //use GRID_SIZE const to create each tile as a square thats 150 x 150 pixels
+      let worldX = (x - GAME_MAP[z].length / 2) * GRID_SIZE;
+      let worldZ = (z - GAME_MAP.length / 2) * GRID_SIZE;
+      // switch is like an "else if" statement but better to use with 3 or more options 
+      // "case" holds the options 
+      // basically checking the grid for symbols and initializing the right class for each
+      switch (tile) {
+        case "p":
+          player = new Player(worldX, worldZ);
+          // break terminates current loop or statement
+          break;
+        case "e":
+          enemies.push(new Enemy(worldX, worldZ));
+          break;
+      }
     }
   }
 }
 
 function draw() {
   background("blue");
+
+  player.updateCamera();
+
+  enemies.forEach((enemy) => enemy.display());
 }
 
 class Player {
