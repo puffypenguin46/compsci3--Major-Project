@@ -78,6 +78,10 @@ function setup() {
         case "e":
           enemies.push(new Enemy(worldX, worldZ));
           break;
+        // for the walls
+        case "X":
+          walls.push(new Wall(worldX, worldZ, GRID_SIZE, 200, GRID_SIZE));
+          break;
       }
     }
   }
@@ -86,7 +90,23 @@ function setup() {
 function draw() {
   background("blue");
 
+  // basic lighting using the 3d p5js program
+
+  ambientLight(150);
+  directionalLight(180, 180, 180, 0, 0, -1);
+
+  // draw interior
+  // see what this does cause its not an already existing function
+  drawFloor();
+  //loop through each wall so we can move through it 
+  walls.forEach((wall) => wall.display());
+
+  //draw player and enemies
+  player.turnTowardsMouse();
+  player.moveForward();
   player.updateCamera();
+
+
 
   enemies.forEach((enemy) => enemy.display());
 }
@@ -110,6 +130,46 @@ class Player {
   }
 }
 
+class Wall {
+
+  // find out where to display wall
+  constructor(x, z, w, h, d) {
+    this.x = x;
+    this.z = z;
+    this.w = w;
+    this.h = h;
+    this.d = d;
+  }
+
+  //display wall texture 
+  //draw the wall as a box in 3d
+  //this is prob cheating since it's not actually raycasting its just 
+  //using the built in 3d program in p5js
+  display() {
+    push();
+    translate(this.x, this.h / 2, this.z);
+    texture(wallTexture);
+    //drawing the wall as a box in 3d space
+    box(this.w, this.h, this.d);
+    pop();
+  }
+}
+
+
+function drawFloor() {
+  push();
+  noStroke();
+  fill("green");
+  translate(0, 0, 0);
+  //draw a 4-sided flat shape with every angle mesuring 90 degrees
+  // basically a 2d shape that can be rotated on a 3d plane
+  plane(width * 10, height * 10);
+  // use half pi to rotate it 90 degrees so the floor isnt on the side
+  // functions like rotate and orbitControl help 
+  rotate(HALF_PI);
+  pop();
+}
+
 class Enemy {
   constructor(x, z) {
     // no y position since everything is on the ground
@@ -118,6 +178,8 @@ class Enemy {
     //radius 
     this.r = 50;
   }
+
+
 
   display() {
     //search up how this push and pop thing works 
