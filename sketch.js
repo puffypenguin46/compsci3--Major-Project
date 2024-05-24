@@ -10,7 +10,7 @@
 
 //ignore
 // function preload() {
-//   hallOne = loadImage('hallway 1.png');
+//   hallOne = loadImage('hallway 1.png');S
 //   hallTwo = loadImage('hall 2.png');
 //   hallThree = loadImage('hall 3.png');
 // }
@@ -45,7 +45,6 @@ const CAM_X = 100;
 const CAM_Y = -75;
 const CAM_Z = 50;
 
-
 let wallTexture;
 let walls = [];
 let player;
@@ -53,7 +52,12 @@ let enemies = [];
 let icecream = [];
 
 function preload() {
-  wallTexture = loadImage("hallway 1.png");
+  sky = loadImage("sky.png");
+  grass = loadImage("grass.png");
+  cball = loadImage("cball.png");
+  ground = loadImage("ground.jpg");
+  wall = loadImage("wall.jpg");
+  yummycone = loadImage("cone.jpg");
 }
 
 function setup() {
@@ -110,7 +114,7 @@ function draw() {
   player.updateCamera();
 
   enemies.forEach((enemy) => enemy.display());
-  icecream.forEach(())
+  icecream.forEach((iccone) => iccone.display());
 }
 
 class Player {
@@ -215,7 +219,7 @@ class Wall {
   display() {
     push();
     translate(this.x, -this.h / 2, this.z);
-    texture(wallTexture);
+    texture(wall);
     //drawing the wall as a box in 3d space
     box(this.w, this.h, this.d);
     pop();
@@ -226,13 +230,14 @@ class Wall {
 function drawFloor() {
   push();
   noStroke();
-  fill("green");
+  // fill("green");
   translate(0, 0, 0);
   // use half pi to rotate it 90 degrees so the floor isnt on the side
   // functions like rotate and orbitControl help 
   rotateX(HALF_PI);
   //draw a 4-sided flat shape with every angle mesuring 90 degrees
   // basically a 2d shape that can be rotated on a 3d plane
+  texture(grass);
   plane(width * 10, height * 10);
   pop();
 }
@@ -252,7 +257,7 @@ class iceCreamCone {
     noStroke();
     //move origin so enemy spawn in the right postion
     translate(this.x, -this.r, this.z);
-    fill("red");
+    texture(yummycone);
     cone(this.r);
     pop();
   }
@@ -277,7 +282,7 @@ class Enemy {
     noStroke();
     //move origin so enemy spawn in the right postion
     translate(this.x, -this.r, this.z);
-    fill("red");
+    texture(ground);
     sphere(this.r);
     pop();
   }
