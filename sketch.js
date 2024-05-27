@@ -58,6 +58,8 @@ function preload() {
   ground = loadImage("ground.jpg");
   wall = loadImage("wall.jpg");
   yummycone = loadImage("cone.jpg");
+  soundFormats('mp3', 'ogg');
+  mySound = loadSound('walking');
 }
 
 function setup() {
@@ -115,6 +117,7 @@ function draw() {
 
   enemies.forEach((enemy) => enemy.display());
   icecream.forEach((iccone) => iccone.display());
+
 }
 
 class Player {
@@ -188,6 +191,12 @@ function keyPressed() {
     case SHIFT:
       player.isRunning = true;
       break;
+  }
+}
+
+function walkSound() {
+  if (keyIsDown(UP_ARROW) === true) {
+    mySound.play();
   }
 }
 
