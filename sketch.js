@@ -50,6 +50,7 @@ let walls = [];
 let player;
 let enemies = [];
 let icecream = [];
+let isStopped = true;
 
 function preload() {
   sky = loadImage("sky.png");
@@ -60,7 +61,9 @@ function preload() {
   yummycone = loadImage("cone.jpg");
   soundFormats('mp3', 'ogg');
   mySound = loadSound('walking');
+  longWalk = loadSound('long walking sound.mp3');
 }
+
 
 function setup() {
   // set canvas to WEBGl so render things in 3d
@@ -117,8 +120,43 @@ function draw() {
 
   enemies.forEach((enemy) => enemy.display());
   icecream.forEach((iccone) => iccone.display());
-
+  
+  walkSound();
 }
+
+function walkingSound() {
+  if (keyIsDown(UP_ARROW) === true ) {
+    if (isStopped === true) {
+      // If the beat is stopped, play it.
+      longWalk.play();
+      isStopped = false;
+    } else {
+      // If the beat is playing, stop it.
+      longWalk.stop();
+      isStopped = true;
+    }
+  }
+}
+
+// function walkingSound() {
+//   if (isStopped === true) {
+//     text('Click to start', 50, 50);
+//   } else {
+//     text('Click to stop', 50, 50);
+//   }
+// }
+
+// function mousePressed() {
+//   if (keyIsDown(UP_ARROW) === true) {
+//     // If the beat is stopped, play it.
+//     longWalk.play();
+//     isStopped = false;
+//   } else {
+//     // If the beat is playing, stop it.
+//     longWalk.stop();
+//     isStopped = true;
+//   }
+// }
 
 class Player {
   constructor(x, z) {
@@ -192,6 +230,7 @@ function keyPressed() {
       player.isRunning = true;
       break;
   }
+  walkSound();
 }
 
 function walkSound() {
