@@ -1,20 +1,9 @@
-// Maze game 
-// Your Name
-// Date
+// Maze game Beta
+// Maram Hani
+// 6/4/2024
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-
-
-// Walker OOP Demo
-
-//ignore
-// function preload() {
-//   hallOne = loadImage('hallway 1.png');S
-//   hallTwo = loadImage('hall 2.png');
-//   hallThree = loadImage('hall 3.png');
-// }
-// ------------------------------------------
+// -need to add sound effects and collectable objects
 
 
 // create the map layout using a 2D ARRAY
@@ -22,20 +11,21 @@
 //lower case e in an enemy 
 const GAME_MAP = [
     "XXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXX",
-    "X        C                e      X",
-    "X                       p        X",
-    "X       XXXXXXX   XXX            X",
-    "X       X           X            X",
-    "XX     X   XX  X   X    X XXXX   X",
-    "X       X   Xe  X   X        X   X",
-    "X       X   XXXXX   X       eX   X", 
-    "X       X           X     XXXX   X",
-    "X       XXXXXXXXXXXXX            X",
-    "X  e                             X",
+    "X                                X",
+    "X                                X",
+    "X                                X",
+    "X                                X",
+    "X                                X",
+    "X                                X",
+    "X                                X", 
+    "X                                X",
+    "X                                X",
+    "X                                X",
     "X                                X",
     "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   ];
   
+  //global variablies and constants 
   const GRID_SIZE = 150;
   const PERSONAL_SPACE = 50;
   const RUN_SPEED = -25;
@@ -45,16 +35,16 @@ const GAME_MAP = [
   const CAM_Y = -75;
   const CAM_Z = 50;
   
-  
-  let wallTexture;
   let walls = [];
   let player;
   let enemies = [];
   let icecream = [];
   
+  //open image and sound files to be used in game
   function preload() {
-    wallTexture = loadImage("hallway 1.png");
+
   }
+  
   
   function setup() {
     // set canvas to WEBGl so render things in 3d
@@ -99,7 +89,6 @@ const GAME_MAP = [
     directionalLight(180, 180, 180, 0, 0, -1);
   
     // draw interior
-    // see what this does cause its not an already existing function
     drawFloor();
     //loop through each wall so we can move through it 
     walls.forEach((wall) => wall.display());
@@ -111,7 +100,9 @@ const GAME_MAP = [
   
     enemies.forEach((enemy) => enemy.display());
     icecream.forEach((iccone) => iccone.display());
+
   }
+
   
   class Player {
     constructor(x, z) {
@@ -165,8 +156,6 @@ const GAME_MAP = [
     }
   
     updateCamera() {
-      // search up how this part works cause i have no idea tbh
-      //a bunch of math 
       let camX = this.x + Math.sin(this.direction) * CAM_X;
       let camZ = this.z + Math.cos(this.direction) * CAM_Z;
       let lookX = this.x - Math.sin(this.direction);
@@ -175,7 +164,7 @@ const GAME_MAP = [
     }
   }
   
-  
+  //arrow key functions
   function keyPressed() {
     switch (keyCode) {
       case UP_ARROW:
@@ -198,6 +187,8 @@ const GAME_MAP = [
     }
   }
   
+  //displaying the objects in 3d
+
   class Wall {
     // find out where to display wall
     constructor(x, z, w, h, d) {
@@ -210,23 +201,19 @@ const GAME_MAP = [
   
     //display wall texture 
     //draw the wall as a box in 3d
-    //this is prob cheating since it's not actually raycasting its just 
-    //using the built in 3d program in p5js
     display() {
       push();
       translate(this.x, -this.h / 2, this.z);
-      texture(wallTexture);
       //drawing the wall as a box in 3d space
       box(this.w, this.h, this.d);
       pop();
     }
   }
   
-  
   function drawFloor() {
     push();
     noStroke();
-    fill("green");
+    // fill("green");
     translate(0, 0, 0);
     // use half pi to rotate it 90 degrees so the floor isnt on the side
     // functions like rotate and orbitControl help 
@@ -246,18 +233,14 @@ const GAME_MAP = [
       this.r = 50;
     }
     display() {
-      //search up how this push and pop thing works 
       push();
-      // make a seamless ball
       noStroke();
       //move origin so enemy spawn in the right postion
       translate(this.x, -this.r, this.z);
-      fill("red");
       cone(this.r);
       pop();
     }
   }
-  
   
   class Enemy {
     constructor(x, z) {
@@ -268,16 +251,11 @@ const GAME_MAP = [
       this.r = 50;
     }
   
-  
-  
     display() {
-      //search up how this push and pop thing works 
       push();
-      // make a seamless ball
       noStroke();
       //move origin so enemy spawn in the right postion
       translate(this.x, -this.r, this.z);
-      fill("red");
       sphere(this.r);
       pop();
     }

@@ -122,6 +122,7 @@ function draw() {
   icecream.forEach((iccone) => iccone.display());
   
   walkSound();
+  
 }
 
 function walkingSound() {
