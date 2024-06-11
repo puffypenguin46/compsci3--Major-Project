@@ -12,7 +12,7 @@
 const GAME_MAP = [
     "XXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXX",
     "X                                X",
-    "X                                X",
+    "X                  e          p  X",
     "X                                X",
     "X                                X",
     "X                                X",
